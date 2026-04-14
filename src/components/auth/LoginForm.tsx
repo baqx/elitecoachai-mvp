@@ -47,7 +47,7 @@ export function LoginForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="name@company.com" 
-              className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 transition-all ${errors.email ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-transparent'}`} 
+              className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all ${errors.email ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-transparent'}`} 
             />
           </div>
           {errors.email && <p className="text-red-500 text-xs flex items-center gap-1 mt-1"><AlertCircle size={12}/>{errors.email}</p>}
@@ -56,7 +56,7 @@ export function LoginForm() {
         <div className="space-y-1.5 text-left">
            <div className="flex justify-between items-center">
              <label className="text-sm font-semibold text-slate-700">Password</label>
-             <a href="#" className="text-xs text-green-600 font-medium hover:underline">Forgot password?</a>
+             <a href="#" className="text-xs text-blue-600 font-medium hover:underline">Forgot password?</a>
            </div>
           <div className="relative">
             <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
@@ -65,13 +65,13 @@ export function LoginForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••" 
-              className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 transition-all ${errors.password ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-transparent'}`} 
+              className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all ${errors.password ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-transparent'}`} 
             />
           </div>
           {errors.password && <p className="text-red-500 text-xs flex items-center gap-1 mt-1"><AlertCircle size={12}/>{errors.password}</p>}
         </div>
         
-        <button type="submit" className="w-full py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-sm transition-colors mt-4">
+        <button type="submit" className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition-colors mt-4">
           Sign In
         </button>
       </form>
@@ -94,7 +94,7 @@ export function LoginForm() {
       </div>
 
       <p className="mt-8 text-center text-sm text-slate-500">
-        Don't have an account? <Link href="/signup" className="text-green-600 font-semibold hover:underline">Sign up</Link>
+        Don't have an account? <Link href="/signup" className="text-blue-600 font-semibold hover:underline">Sign up</Link>
       </p>
     </div>
   );

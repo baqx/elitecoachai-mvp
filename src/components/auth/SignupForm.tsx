@@ -51,7 +51,7 @@ export function SignupForm() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="John Doe" 
-              className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 transition-all ${errors.name ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-transparent'}`} 
+              className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all ${errors.name ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-transparent'}`} 
             />
           </div>
           {errors.name && <p className="text-red-500 text-xs flex items-center gap-1 mt-1"><AlertCircle size={12}/>{errors.name}</p>}
@@ -66,7 +66,7 @@ export function SignupForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="name@company.com" 
-              className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 transition-all ${errors.email ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-transparent'}`} 
+              className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all ${errors.email ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-transparent'}`} 
             />
           </div>
           {errors.email && <p className="text-red-500 text-xs flex items-center gap-1 mt-1"><AlertCircle size={12}/>{errors.email}</p>}
@@ -81,13 +81,13 @@ export function SignupForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••" 
-              className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600 transition-all ${errors.password ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-transparent'}`} 
+              className={`w-full pl-10 pr-4 py-2.5 bg-slate-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition-all ${errors.password ? 'border-red-500 focus:border-red-500' : 'border-slate-200 focus:border-transparent'}`} 
             />
           </div>
           {errors.password && <p className="text-red-500 text-xs flex items-center gap-1 mt-1"><AlertCircle size={12}/>{errors.password}</p>}
         </div>
         
-        <button type="submit" className="w-full py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-sm transition-colors mt-4">
+        <button type="submit" className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition-colors mt-4">
           Create Account
         </button>
       </form>
@@ -110,7 +110,7 @@ export function SignupForm() {
       </div>
 
       <p className="mt-8 text-center text-sm text-slate-500">
-        Already have an account? <Link href="/login" className="text-green-600 font-semibold hover:underline">Log in</Link>
+        Already have an account? <Link href="/login" className="text-blue-600 font-semibold hover:underline">Log in</Link>
       </p>
     </div>
   );

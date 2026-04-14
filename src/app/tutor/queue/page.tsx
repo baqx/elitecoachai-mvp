@@ -77,8 +77,8 @@ export default function TutorQueuePage() {
           <h1 className="text-3xl font-bold text-slate-800 tracking-tight">Support Queue</h1>
           <p className="text-slate-500 mt-1 font-medium">Learner escalations awaiting your review</p>
         </div>
-        <div className="flex items-center gap-2 bg-green-50 text-green-700 px-5 py-2.5 rounded-xl font-bold text-sm border border-green-200/50 shadow-sm">
-          <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse outline outline-2 outline-green-500/20" />
+        <div className="flex items-center gap-2 bg-blue-50 text-blue-700 px-5 py-2.5 rounded-xl font-bold text-sm border border-blue-200/50 shadow-sm">
+          <div className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse outline outline-2 outline-green-500/20" />
           Online & Accepting Queries
         </div>
       </div>
@@ -88,7 +88,7 @@ export default function TutorQueuePage() {
         <div className="w-full xl:w-96 border border-slate-200 bg-white rounded-3xl overflow-hidden shadow-sm flex flex-col shrink-0">
           <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
              <h2 className="font-bold text-slate-800 text-lg">Open Tickets (3)</h2>
-             <button className="text-xs text-green-600 font-bold hover:underline transition-colors shrink-0">Refresh Sync</button>
+             <button className="text-xs text-blue-600 font-bold hover:underline transition-colors shrink-0">Refresh Sync</button>
           </div>
           <div className="overflow-y-auto flex-1 p-3 space-y-2">
             {MOCK_TICKETS.map((ticket) => (
@@ -174,8 +174,8 @@ export default function TutorQueuePage() {
 
                   {msg.role === "user" && (
                     <div className="flex gap-4 max-w-[85%] sm:max-w-[70%] flex-row-reverse">
-                      <div className="w-10 h-10 rounded-full bg-green-100 border border-green-200 flex items-center justify-center flex-shrink-0 shadow-inner mt-1">
-                         <User size={20} className="text-green-700" />
+                      <div className="w-10 h-10 rounded-full bg-blue-100 border border-blue-200 flex items-center justify-center flex-shrink-0 shadow-inner mt-1">
+                         <User size={20} className="text-blue-700" />
                       </div>
                       <div className="bg-slate-900 text-white p-5 rounded-2xl rounded-tr-sm text-sm shadow-md">
                         <p className="leading-relaxed">{msg.content}</p>
@@ -193,14 +193,14 @@ export default function TutorQueuePage() {
                <textarea 
                  rows={4} 
                  placeholder="Draft your reply to the learner or enter internal resolution notes..." 
-                 className="w-full pl-5 pr-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm shadow-inner resize-none font-medium text-slate-700"
+                 className="w-full pl-5 pr-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm shadow-inner resize-none font-medium text-slate-700"
                />
              </div>
              <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
                 <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 border-2 border-slate-200 bg-white text-slate-700 rounded-xl hover:bg-slate-50 font-bold transition-all shadow-sm hover:-translate-y-0.5">
                   <Video size={18} /> Record Video Reply
                 </button>
-                <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 font-bold transition-all shadow-md hover:-translate-y-0.5">
+                <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 font-bold transition-all shadow-md hover:-translate-y-0.5">
                   <CheckCircle size={18} /> Mark Ticket Resolved
                 </button>
              </div>

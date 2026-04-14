@@ -9,14 +9,14 @@ export default function TutorEarningsPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-gradient-to-br from-green-600 to-green-700 p-6 rounded-2xl shadow-md text-white">
-          <div className="flex items-center gap-2 text-green-100 mb-4 font-medium">
+        <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-6 rounded-2xl shadow-md text-white">
+          <div className="flex items-center gap-2 text-blue-100 mb-4 font-medium">
             <DollarSign size={18} /> Available Balance
           </div>
           <p className="text-4xl font-bold tracking-tight mb-2">$1,240.50</p>
-          <div className="flex justify-between items-center mt-6 pt-4 border-t border-green-500/30">
-            <span className="text-sm text-green-100">Next payout: Nov 1</span>
-            <button className="px-4 py-1.5 bg-white text-green-700 text-sm font-bold rounded-lg shadow-sm hover:bg-green-50 transition-colors">
+          <div className="flex justify-between items-center mt-6 pt-4 border-t border-blue-500/30">
+            <span className="text-sm text-blue-100">Next payout: Nov 1</span>
+            <button className="px-4 py-1.5 bg-white text-blue-700 text-sm font-bold rounded-lg shadow-sm hover:bg-blue-50 transition-colors">
               Withdraw
             </button>
           </div>
@@ -27,7 +27,7 @@ export default function TutorEarningsPage() {
              <TrendingUp size={18} /> This Month
           </div>
           <p className="text-3xl font-bold text-slate-800 mb-2">$850.00</p>
-          <p className="text-sm font-medium text-green-600 flex items-center gap-1">
+          <p className="text-sm font-medium text-blue-600 flex items-center gap-1">
             <TrendingUp size={14} /> +12% from last month
           </p>
         </div>
@@ -54,8 +54,8 @@ export default function TutorEarningsPage() {
                  <p className="font-bold text-slate-800">{tx.amount}</p>
                  <p className="text-xs text-slate-500 mt-0.5">{tx.date} • {tx.method}</p>
                </div>
-               <div className="flex items-center gap-2 px-3 py-1 bg-green-50 text-green-700 rounded-full text-xs font-semibold">
-                 <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+               <div className="flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-xs font-semibold">
+                 <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
                  {tx.status}
                </div>
             </div>

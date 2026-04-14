@@ -114,13 +114,13 @@ export function AITutorChat() {
 
             {msg.role === "ai" && (
               <div className="flex gap-3 max-w-[85%]">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center flex-shrink-0 shadow-sm mt-1">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-sm mt-1">
                    <ShieldCheck size={16} className="text-white" />
                 </div>
                 <div className={`p-4 rounded-2xl rounded-tl-sm text-sm shadow-sm border
                   ${msg.isEscalated ? 'bg-amber-50 border-amber-200 text-amber-900' : 'bg-white border-slate-100 text-slate-700'}
                 `}>
-                  <div className="prose prose-sm prose-slate max-w-none prose-p:leading-relaxed prose-a:text-green-600">
+                  <div className="prose prose-sm prose-slate max-w-none prose-p:leading-relaxed prose-a:text-blue-600">
                     <ReactMarkdown>{msg.content}</ReactMarkdown>
                   </div>
                   {msg.isEscalated && (
@@ -148,11 +148,11 @@ export function AITutorChat() {
         ))}
         {isStreaming && messages[messages.length - 1]?.role === "user" && (
           <div className="flex gap-3 max-w-[85%]">
-             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center flex-shrink-0 shadow-sm mt-1">
+             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center flex-shrink-0 shadow-sm mt-1">
                <ShieldCheck size={16} className="text-white" />
              </div>
              <div className="bg-white border border-slate-100 p-4 rounded-2xl rounded-tl-sm text-sm shadow-sm flex items-center justify-center h-10 min-w-[60px]">
-               <Loader2 size={16} className="animate-spin text-green-600" />
+               <Loader2 size={16} className="animate-spin text-blue-600" />
              </div>
           </div>
         )}
@@ -168,7 +168,7 @@ export function AITutorChat() {
              onKeyDown={(e) => e.key === 'Enter' && handleSend()}
              placeholder="Type your question..." 
              disabled={isStreaming}
-             className="w-full pl-5 pr-14 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm shadow-inner disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed transition-colors"
+             className="w-full pl-5 pr-14 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm shadow-inner disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed transition-colors"
            />
            <button 
              onClick={handleSend}

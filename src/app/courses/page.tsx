@@ -16,7 +16,7 @@ export default function CoursesPage() {
             <input 
               type="text" 
               placeholder="Search courses..." 
-              className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+              className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
             />
           </div>
           <button className="p-2 border border-slate-200 rounded-lg text-slate-600 hover:bg-slate-50 flex-shrink-0">
@@ -31,12 +31,12 @@ export default function CoursesPage() {
             <div className="h-40 bg-slate-200 relative overflow-hidden">
               {/* Image placeholder */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent z-10" />
-              <div className="absolute bottom-3 left-4 z-20 text-white font-bold text-xs px-2 py-1 bg-green-500/90 rounded backdrop-blur-sm">
+              <div className="absolute bottom-3 left-4 z-20 text-white font-bold text-xs px-2 py-1 bg-blue-500/90 rounded backdrop-blur-sm">
                 Intermediate
               </div>
             </div>
             <div className="p-5 flex-1 flex flex-col">
-              <h3 className="font-bold text-slate-900 mb-1 line-clamp-2 leading-tight group-hover:text-green-600 transition-colors">
+              <h3 className="font-bold text-slate-900 mb-1 line-clamp-2 leading-tight group-hover:text-blue-600 transition-colors">
                 AI Foundations: Building LLM Applications
               </h3>
               <p className="text-sm text-slate-500 mb-4 line-clamp-2 flex-1">

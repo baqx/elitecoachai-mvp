@@ -56,9 +56,9 @@ export default function EnterpriseAdminDashboard() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
           { label: "Total Active Users", value: "2,459", sub: "+12% this month", icon: Users, color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-100" },
-          { label: "Completion Rate", value: "68.4%", sub: "+4% vs industry", icon: TrendingUp, color: "text-green-600", bg: "bg-green-50", border: "border-green-100" },
+          { label: "Completion Rate", value: "68.4%", sub: "+4% vs industry", icon: TrendingUp, color: "text-blue-600", bg: "bg-blue-50", border: "border-blue-100" },
           { label: "At-Risk Learners", value: "142", sub: "-8% from last week", icon: AlertTriangle, color: "text-amber-600", bg: "bg-amber-50", border: "border-amber-100" },
-          { label: "Budget Spent", value: "$45.2k", sub: "64% of annual budget", icon: DollarSign, color: "text-purple-600", bg: "bg-purple-50", border: "border-purple-100" },
+          { label: "Budget Spent", value: "$45.2k", sub: "64% of annual budget", icon: DollarSign, color: "text-indigo-600", bg: "bg-indigo-50", border: "border-indigo-100" },
         ].map((stat, i) => {
           const Icon = stat.icon;
           return (
@@ -138,7 +138,7 @@ export default function EnterpriseAdminDashboard() {
                       <div className="flex items-center gap-3">
                         <div className="w-full max-w-[120px] bg-slate-100 rounded-full h-2">
                           <div 
-                            className={`h-full rounded-full ${user.status === 'At-Risk' ? 'bg-amber-500' : 'bg-green-500'}`} 
+                            className={`h-full rounded-full ${user.status === 'At-Risk' ? 'bg-amber-500' : 'bg-blue-500'}`} 
                             style={{ width: `${user.progress}%` }} 
                           />
                         </div>
@@ -150,7 +150,7 @@ export default function EnterpriseAdminDashboard() {
                     </td>
                     <td className="px-8 py-5 text-right">
                        <span className={`inline-flex items-center justify-center px-3 py-1.5 rounded-lg text-[11px] font-black uppercase tracking-wider
-                         ${user.status === 'Active' ? 'bg-green-50 text-green-700 border border-green-200' : ''}
+                         ${user.status === 'Active' ? 'bg-blue-50 text-blue-700 border border-blue-200' : ''}
                          ${user.status === 'At-Risk' ? 'bg-amber-50 text-amber-700 border border-amber-200' : ''}
                          ${user.status === 'Not Started' ? 'bg-slate-100 text-slate-500 border border-slate-200' : ''}
                        `}>

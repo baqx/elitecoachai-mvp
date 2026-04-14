@@ -30,13 +30,13 @@ export function ModuleViewer({ courseId, moduleId }: { courseId: string; moduleI
         {/* Video Player Placeholder */}
         <div className="aspect-video bg-slate-900 rounded-3xl flex flex-col items-center justify-center relative shadow-xl shadow-slate-900/10 overflow-hidden border border-slate-800 group cursor-pointer hover:shadow-2xl transition-all">
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-slate-900/40" />
-          <PlayCircle size={80} className="text-white/80 group-hover:text-green-400 group-hover:scale-110 transition-all duration-500 relative z-10 drop-shadow-lg" />
+          <PlayCircle size={80} className="text-white/80 group-hover:text-blue-400 group-hover:scale-110 transition-all duration-500 relative z-10 drop-shadow-lg" />
           <div className="absolute bottom-6 left-8 z-10">
              <div className="text-white font-bold text-xl md:text-2xl mb-1 drop-shadow-md">Module {moduleId}: Advanced Context Management</div>
              <div className="text-slate-300 font-medium text-sm flex items-center gap-2 drop-shadow">14:52 • Technical Deep Dive</div>
           </div>
           <div className="absolute bottom-0 left-0 w-full h-1.5 bg-slate-800/80">
-             <div className="h-full bg-green-500 w-[60%]" />
+             <div className="h-full bg-blue-500 w-[60%]" />
           </div>
         </div>
         
@@ -63,7 +63,7 @@ export function ModuleViewer({ courseId, moduleId }: { courseId: string; moduleI
         {/* Inline Knowledge Check */}
         <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden border-t-4 border-t-green-500">
            <div className="bg-slate-50 px-8 py-5 border-b border-slate-100 flex items-center gap-3">
-             <div className="bg-green-100 p-1.5 rounded-lg text-green-700">
+             <div className="bg-blue-100 p-1.5 rounded-lg text-blue-700">
                <CheckCircle2 size={24} strokeWidth={2.5} />
              </div>
              <h3 className="font-bold text-slate-800 text-lg uppercase tracking-wider text-sm">Knowledge Check</h3>
@@ -77,7 +77,7 @@ export function ModuleViewer({ courseId, moduleId }: { courseId: string; moduleI
                  let optionStyle = "border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-700";
                  
                  if (isSubmitted) {
-                   if (i === correctAnswer) optionStyle = "border-green-500 bg-green-50 text-green-800 shadow-sm";
+                   if (i === correctAnswer) optionStyle = "border-blue-500 bg-blue-50 text-blue-800 shadow-sm";
                    else if (isSelected) optionStyle = "border-red-500 bg-red-50 text-red-800";
                    else optionStyle = "border-slate-200 bg-slate-50 text-slate-400 opacity-50";
                  } else if (isSelected) {
@@ -92,7 +92,7 @@ export function ModuleViewer({ courseId, moduleId }: { courseId: string; moduleI
                    >
                      <div className="flex gap-4 items-center">
                         <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 transition-colors
-                           ${isSubmitted && i === correctAnswer ? 'border-green-500 bg-green-500' : ''}
+                           ${isSubmitted && i === correctAnswer ? 'border-blue-500 bg-blue-500' : ''}
                            ${isSubmitted && isSelected && i !== correctAnswer ? 'border-red-500 bg-red-500' : ''}
                            ${!isSubmitted && isSelected ? 'border-blue-500 bg-blue-500' : ''}
                            ${!isSubmitted && !isSelected ? 'border-slate-300' : ''}
@@ -123,7 +123,7 @@ export function ModuleViewer({ courseId, moduleId }: { courseId: string; moduleI
           <button className="flex-1 flex items-center justify-center gap-3 px-6 py-4 md:py-5 bg-white border border-slate-200 text-slate-700 rounded-2xl hover:bg-slate-50 font-bold transition-all shadow-sm hover:shadow hover:-translate-y-0.5">
             <ChevronLeft size={20} /> Previous Module
           </button>
-          <button className="flex-1 flex items-center justify-center gap-3 px-6 py-4 md:py-5 bg-green-600 text-white rounded-2xl hover:bg-green-700 font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
+          <button className="flex-1 flex items-center justify-center gap-3 px-6 py-4 md:py-5 bg-blue-600 text-white rounded-2xl hover:bg-blue-700 font-bold transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5">
             Next Module <ChevronRight size={20} />
           </button>
         </div>
@@ -134,14 +134,14 @@ export function ModuleViewer({ courseId, moduleId }: { courseId: string; moduleI
         <div className="sticky top-6 h-[calc(100vh-6rem)] min-h-[500px] bg-white rounded-3xl border border-slate-200 shadow-2xl shadow-slate-200/50 overflow-hidden flex flex-col">
           {/* Chat Header */}
           <div className="bg-slate-900 p-5 border-b border-slate-800 flex items-center gap-4 relative overflow-hidden">
-             <div className="absolute right-0 top-0 w-32 h-32 bg-green-500 opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
-             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-inner relative z-10">
+             <div className="absolute right-0 top-0 w-32 h-32 bg-blue-500 opacity-10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center shadow-inner relative z-10">
                <MessageSquare size={22} className="text-white" />
              </div>
              <div className="relative z-10">
                <h3 className="font-bold text-white text-lg leading-tight">Ask AI Tutor</h3>
                <div className="flex items-center gap-1.5 mt-0.5">
-                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                 <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
                  <p className="text-slate-400 text-xs font-medium">Online & ready to help</p>
                </div>
              </div>

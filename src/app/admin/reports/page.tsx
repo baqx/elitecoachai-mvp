@@ -9,7 +9,7 @@ export default function AdminReportsPage() {
           <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Reports & Analytics</h1>
           <p className="text-slate-500">Generate and export system reports</p>
         </div>
-        <button className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm">
+        <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-medium transition-colors shadow-sm">
           <DownloadCloud size={18} /> Export CSV
         </button>
       </div>
@@ -19,10 +19,10 @@ export default function AdminReportsPage() {
           <h2 className="font-bold text-slate-800 mb-3">Available Reports</h2>
           {["User Engagement Completion", "Revenue Analytics", "Tutor Performance Rates", "Quiz & Assessment Averages"].map((report, i) => (
             <div key={i} className={`p-4 rounded-xl border cursor-pointer transition-colors
-              ${i === 0 ? "border-green-500 bg-green-50/50 shadow-sm" : "border-slate-200 bg-white hover:border-slate-300"}`}
+              ${i === 0 ? "border-blue-500 bg-blue-50/50 shadow-sm" : "border-slate-200 bg-white hover:border-slate-300"}`}
             >
-              <h3 className={`font-bold ${i === 0 ? "text-green-800" : "text-slate-700"}`}>{report}</h3>
-              <p className={`text-xs mt-1 ${i === 0 ? "text-green-600" : "text-slate-500"}`}>Last generated: 2 days ago</p>
+              <h3 className={`font-bold ${i === 0 ? "text-blue-800" : "text-slate-700"}`}>{report}</h3>
+              <p className={`text-xs mt-1 ${i === 0 ? "text-blue-600" : "text-slate-500"}`}>Last generated: 2 days ago</p>
             </div>
           ))}
         </div>

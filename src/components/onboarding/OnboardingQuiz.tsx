@@ -69,7 +69,7 @@ export function OnboardingQuiz() {
         </div>
         <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
           <div 
-            className="bg-green-500 h-full rounded-full transition-all duration-500 ease-out"
+            className="bg-blue-500 h-full rounded-full transition-all duration-500 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -80,7 +80,7 @@ export function OnboardingQuiz() {
         {currentStep === 1 && (
           <div className="space-y-6 animate-in slide-in-from-right-4 fade-in duration-300 relative">
             <div>
-              <span className="text-xs font-bold text-green-600 uppercase tracking-wider mb-2 block">Background • 1/3</span>
+              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 block">Background • 1/3</span>
               <h2 className="text-2xl font-bold text-slate-800">What is your current role or profession?</h2>
               <p className="text-slate-500 mt-2 text-sm">We'll tailor your vocabulary and examples accordingly.</p>
             </div>
@@ -88,7 +88,7 @@ export function OnboardingQuiz() {
               {["Software Engineer", "Product Manager", "Data Analyst", "Student", "Educator", "Other"].map((role) => (
                 <label 
                   key={role} 
-                  className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.role === role ? 'border-green-500 bg-green-50 text-green-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
+                  className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.role === role ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
                 >
                   <input 
                     type="radio" 
@@ -96,7 +96,7 @@ export function OnboardingQuiz() {
                     checked={formData.role === role} 
                     onChange={() => updateFormData("role", role)} 
                   />
-                  {formData.role === role && <CheckCircle2 size={18} className="text-green-600" />}
+                  {formData.role === role && <CheckCircle2 size={18} className="text-blue-600" />}
                   <span className="font-medium">{role}</span>
                 </label>
               ))}
@@ -107,14 +107,14 @@ export function OnboardingQuiz() {
         {currentStep === 2 && (
           <div className="space-y-6 animate-in slide-in-from-right-4 fade-in duration-300">
             <div>
-               <span className="text-xs font-bold text-green-600 uppercase tracking-wider mb-2 block">Background • 2/3</span>
+               <span className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 block">Background • 2/3</span>
               <h2 className="text-2xl font-bold text-slate-800">How many years of professional experience do you have?</h2>
             </div>
             <div className="grid grid-cols-1 gap-3">
               {["Less than 1 year", "1-3 years", "3-5 years", "5+ years"].map((exp) => (
                 <label 
                   key={exp} 
-                  className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.experience === exp ? 'border-green-500 bg-green-50 text-green-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
+                  className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.experience === exp ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
                 >
                   <input 
                     type="radio" 
@@ -122,7 +122,7 @@ export function OnboardingQuiz() {
                     checked={formData.experience === exp} 
                     onChange={() => updateFormData("experience", exp)} 
                   />
-                  {formData.experience === exp && <CheckCircle2 size={18} className="text-green-600" />}
+                  {formData.experience === exp && <CheckCircle2 size={18} className="text-blue-600" />}
                   <span className="font-medium">{exp}</span>
                 </label>
               ))}
@@ -133,7 +133,7 @@ export function OnboardingQuiz() {
         {currentStep === 3 && (
           <div className="space-y-6 animate-in slide-in-from-right-4 fade-in duration-300">
             <div>
-              <span className="text-xs font-bold text-green-600 uppercase tracking-wider mb-2 block">Background • 3/3</span>
+              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 block">Background • 3/3</span>
               <h2 className="text-2xl font-bold text-slate-800">What is your primary learning goal?</h2>
             </div>
             <div className="grid grid-cols-1 gap-3">
@@ -145,7 +145,7 @@ export function OnboardingQuiz() {
               ].map((goal) => (
                 <label 
                   key={goal} 
-                  className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.goal === goal ? 'border-green-500 bg-green-50 text-green-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
+                  className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.goal === goal ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
                 >
                   <input 
                     type="radio" 
@@ -153,7 +153,7 @@ export function OnboardingQuiz() {
                     checked={formData.goal === goal} 
                     onChange={() => updateFormData("goal", goal)} 
                   />
-                  {formData.goal === goal && <CheckCircle2 size={18} className="text-green-600" />}
+                  {formData.goal === goal && <CheckCircle2 size={18} className="text-blue-600" />}
                   <span className="font-medium">{goal}</span>
                 </label>
               ))}
@@ -176,7 +176,7 @@ export function OnboardingQuiz() {
               ].map((skill) => (
                 <label 
                   key={skill.level} 
-                  className={`flex flex-col gap-1 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.pythonSkill === skill.level ? 'border-green-500 bg-green-50 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200'}`}
+                  className={`flex flex-col gap-1 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.pythonSkill === skill.level ? 'border-blue-500 bg-blue-50 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200'}`}
                 >
                   <input 
                     type="radio" 
@@ -185,10 +185,10 @@ export function OnboardingQuiz() {
                     onChange={() => updateFormData("pythonSkill", skill.level)} 
                   />
                   <div className="flex items-center gap-2">
-                    {formData.pythonSkill === skill.level && <CheckCircle2 size={16} className="text-green-600" />}
-                    <span className={`font-bold ${formData.pythonSkill === skill.level ? 'text-green-800' : 'text-slate-800'}`}>{skill.level}</span>
+                    {formData.pythonSkill === skill.level && <CheckCircle2 size={16} className="text-blue-600" />}
+                    <span className={`font-bold ${formData.pythonSkill === skill.level ? 'text-blue-800' : 'text-slate-800'}`}>{skill.level}</span>
                   </div>
-                  <span className={`text-sm ml-[1.6rem] ${formData.pythonSkill === skill.level ? 'text-green-600' : 'text-slate-500'}`}>{skill.desc}</span>
+                  <span className={`text-sm ml-[1.6rem] ${formData.pythonSkill === skill.level ? 'text-blue-600' : 'text-slate-500'}`}>{skill.desc}</span>
                 </label>
               ))}
             </div>
@@ -211,7 +211,7 @@ export function OnboardingQuiz() {
               ].map((skill) => (
                 <label 
                   key={skill.level} 
-                  className={`flex flex-col gap-1 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.mlSkill === skill.level ? 'border-green-500 bg-green-50 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200'}`}
+                  className={`flex flex-col gap-1 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.mlSkill === skill.level ? 'border-blue-500 bg-blue-50 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200'}`}
                 >
                   <input 
                     type="radio" 
@@ -220,10 +220,10 @@ export function OnboardingQuiz() {
                     onChange={() => updateFormData("mlSkill", skill.level)} 
                   />
                   <div className="flex items-center gap-2">
-                    {formData.mlSkill === skill.level && <CheckCircle2 size={16} className="text-green-600" />}
-                    <span className={`font-bold ${formData.mlSkill === skill.level ? 'text-green-800' : 'text-slate-800'}`}>{skill.level}</span>
+                    {formData.mlSkill === skill.level && <CheckCircle2 size={16} className="text-blue-600" />}
+                    <span className={`font-bold ${formData.mlSkill === skill.level ? 'text-blue-800' : 'text-slate-800'}`}>{skill.level}</span>
                   </div>
-                  <span className={`text-sm ml-[1.6rem] ${formData.mlSkill === skill.level ? 'text-green-600' : 'text-slate-500'}`}>{skill.desc}</span>
+                  <span className={`text-sm ml-[1.6rem] ${formData.mlSkill === skill.level ? 'text-blue-600' : 'text-slate-500'}`}>{skill.desc}</span>
                 </label>
               ))}
             </div>
@@ -247,7 +247,7 @@ export function OnboardingQuiz() {
             onClick={handleNext}
             disabled={!isCurrentStepValid()}
             className={`flex items-center gap-2 px-6 py-2.5 text-sm font-medium rounded-lg shadow-sm transition-all
-              ${!isCurrentStepValid() ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-green-600 hover:bg-green-700 text-white'}`}
+              ${!isCurrentStepValid() ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
           >
             Continue <ChevronRight size={16} />
           </button>

@@ -63,9 +63,9 @@ export function Sidebar() {
       `}>
         <div className="p-6 border-b border-slate-100">
           <Link href="/dashboard" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
-            <div className="w-8 h-8 rounded-lg bg-green-600 flex items-center justify-center text-white font-bold tracking-tight">E</div>
+            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold tracking-tight">E</div>
             <h1 className="text-xl font-bold tracking-tight text-slate-800">
-              EliteCoach<span className="text-green-600">.ai</span>
+              EliteCoach<span className="text-blue-600">.ai</span>
             </h1>
           </Link>
         </div>
@@ -87,11 +87,11 @@ export function Sidebar() {
                 className={`
                   flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
                   ${isActive 
-                    ? "bg-green-50 text-green-700 shadow-sm shadow-green-100/50" 
+                    ? "bg-blue-50 text-blue-700 shadow-sm shadow-green-100/50" 
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}
                 `}
               >
-                <Icon size={18} className={isActive ? "text-green-600" : "text-slate-400"} />
+                <Icon size={18} className={isActive ? "text-blue-600" : "text-slate-400"} />
                 {link.name}
               </Link>
             )

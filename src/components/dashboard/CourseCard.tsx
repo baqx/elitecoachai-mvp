@@ -12,15 +12,15 @@ interface CourseCardProps {
 
 export function CourseCard({ title, domain, difficulty, completion, totalModules, completedModules, milestone }: CourseCardProps) {
   const difficultyColors = {
-    Beginner: "bg-emerald-100 text-emerald-700",
+    Beginner: "bg-blue-100 text-blue-700",
     Intermediate: "bg-blue-100 text-blue-700",
-    Advanced: "bg-purple-100 text-purple-700"
+    Advanced: "bg-indigo-100 text-indigo-700"
   };
 
   return (
-    <div className={`w-[320px] bg-white rounded-3xl border ${milestone ? 'border-green-400 shadow-lg shadow-green-100/50' : 'border-slate-100 shadow-sm hover:shadow-md hover:border-slate-200'} p-7 flex flex-col transition-all duration-300 relative overflow-hidden group`}>
+    <div className={`w-[320px] bg-white rounded-3xl border ${milestone ? 'border-blue-400 shadow-lg shadow-green-100/50' : 'border-slate-100 shadow-sm hover:shadow-md hover:border-slate-200'} p-7 flex flex-col transition-all duration-300 relative overflow-hidden group`}>
       {milestone && (
-        <div className="absolute top-0 right-0 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-bold px-3 py-1.5 rounded-bl-2xl shadow-sm flex items-center gap-1.5">
+        <div className="absolute top-0 right-0 bg-gradient-to-r from-blue-500 to-blue-500 text-white text-xs font-bold px-3 py-1.5 rounded-bl-2xl shadow-sm flex items-center gap-1.5">
           <Trophy size={14} /> Milestone Area
         </div>
       )}
@@ -30,7 +30,7 @@ export function CourseCard({ title, domain, difficulty, completion, totalModules
          <span className={`text-[11px] font-black px-3 py-1.5 rounded-lg uppercase tracking-wider ${difficultyColors[difficulty]}`}>{difficulty}</span>
       </div>
       
-      <h3 className="text-xl font-bold text-slate-800 mb-3 leading-tight group-hover:text-green-700 transition-colors">
+      <h3 className="text-xl font-bold text-slate-800 mb-3 leading-tight group-hover:text-blue-700 transition-colors">
         {title}
       </h3>
       
@@ -46,7 +46,7 @@ export function CourseCard({ title, domain, difficulty, completion, totalModules
         </div>
         <div className="w-full bg-slate-100 rounded-full h-3 shadow-inner relative overflow-hidden">
           <div 
-            className={`absolute top-0 left-0 h-full rounded-full transition-all duration-1000 ease-out ${completion === 100 ? 'bg-gradient-to-r from-green-400 to-emerald-500' : 'bg-gradient-to-r from-blue-500 to-cyan-400'}`} 
+            className={`absolute top-0 left-0 h-full rounded-full transition-all duration-1000 ease-out ${completion === 100 ? 'bg-gradient-to-r from-blue-400 to-blue-500' : 'bg-gradient-to-r from-blue-500 to-cyan-400'}`} 
             style={{ width: `${completion}%` }} 
           />
         </div>
