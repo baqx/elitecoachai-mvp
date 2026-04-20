@@ -1,210 +1,124 @@
-"use client";
-
-import { useState } from "react";
-import { MessageSquare, Clock, CheckCircle, Video, FileText, User, ShieldCheck, AlertTriangle } from "lucide-react";
-import ReactMarkdown from "react-markdown";
-
-type TranscriptMessage = {
-  role: "user" | "ai" | "system";
-  content: string;
-  escalated?: boolean;
-};
-
-type Ticket = {
-  id: number;
-  name: string;
-  course: string;
-  wait: string;
-  module: string;
-  transcript: TranscriptMessage[];
-};
-
-const MOCK_TICKETS: Ticket[] = [
-  { 
-    id: 1, 
-    name: "Alex Johnson", 
-    course: "Advanced Prompt Engineering", 
-    wait: "14m", 
-    module: "Module 2",
-    transcript: [
-      { role: "ai", content: "Hello! I'm your AI Tutor. Need help understanding context windows?" },
-      { role: "user", content: "Hi tutor, I'm stuck on module 2. Why does the model forget my instructions even when I place them at the very start of the prompt if the context window isn't full yet? Is there a degradation problem?" },
-      { role: "ai", content: "That's a great question! Here's a brief breakdown:\n\n* **Token limit:** Ensures compute stays bounded.\n* **Attention Mechanism:** Focuses on the most relevant tokens inside the active window.\n\nKeep in mind that early context rules supreme!" },
-      { role: "user", content: "I still don't understand, can I talk to a human tutor please?" },
-      { role: "ai", content: "I understand you're still having trouble. I have escalated this question to a **Human Tutor**.", escalated: true },
-      { role: "system", content: "Ticket #4029 generated. Waiting for an available Human Tutor..." }
-    ]
-  },
-  { 
-    id: 2, 
-    name: "Samantha Lee", 
-    course: "Data Science 101", 
-    wait: "32m", 
-    module: "Module 5",
-    transcript: [
-      { role: "user", content: "Why do my Pandas dataframes index completely wrong when merging?" },
-      { role: "ai", content: "When you merge DataFrames, Pandas can reset or preserve indexes depending on your `how` parameter and whether you merge on index or columns." },
-      { role: "user", content: "Can a human review my code file? The AI output isn't helping me fix the error." },
-      { role: "ai", content: "I am escalating your request along with your code logs to a Human Tutor right now.", escalated: true },
-      { role: "system", content: "Ticket #4030 generated. Waiting for an available Human Tutor..." }
-    ]
-  },
-  { 
-    id: 3, 
-    name: "David Kim", 
-    course: "React Patterns", 
-    wait: "1h 5m", 
-    module: "Module 8",
-    transcript: [
-      { role: "user", content: "It says I have too many re-renders. Help!" },
-      { role: "ai", content: "A \"too many re-renders\" error usually happens if you incorrectly call a setState function immediately inside your component body instead of inside a `useEffect` or an event handler." },
-      { role: "user", content: "I swear I'm not doing that. This is too frustrating, get me a real tutor." },
-      { role: "ai", content: "I'll connect you right away to a Human Tutor.", escalated: true },
-      { role: "system", content: "Ticket #4031 generated. Waiting for an available Human Tutor..." }
-    ]
-  }
-];
+import { Search, Filter, AlertCircle, Clock, CheckCircle } from "lucide-react";
 
 export default function TutorQueuePage() {
-  const [selectedTicketId, setSelectedTicketId] = useState<number>(MOCK_TICKETS[0].id);
-  const selectedTicket = MOCK_TICKETS.find(t => t.id === selectedTicketId) || MOCK_TICKETS[0];
+  const escalations = [
+    {
+      id: "esc-1",
+      learner: "James T.",
+      course: "Data Analytics with Python",
+      reason: "Repeated Failures in Module 3 Knowledge Check",
+      time: "20 mins ago",
+      status: "open",
+      priority: "high"
+    },
+    {
+      id: "esc-2",
+      learner: "Aisha F.",
+      course: "Financial Modeling",
+      reason: "Sentiment Flag: Frustration Detected",
+      time: "1 hr ago",
+      status: "open",
+      priority: "medium"
+    },
+    {
+      id: "esc-3",
+      learner: "Bolu O.",
+      course: "AI Fundamentals",
+      reason: "Manual Request for Human Clarification",
+      time: "3 hrs ago",
+      status: "open",
+      priority: "low"
+    },
+    {
+      id: "esc-4",
+      learner: "Sarah P.",
+      course: "Executive Leadership",
+      reason: "Pinecone Retrieval Error / Unknown Concept",
+      time: "Yesterday",
+      status: "resolved",
+      priority: "medium"
+    }
+  ];
 
   return (
-    <div className="space-y-6 animate-in fade-in duration-500 pb-12 w-full h-full flex flex-col">
-      {/* Header */}
-      <div className="flex justify-between items-end mb-4 px-1">
+    <div className="max-w-5xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+      <div className="mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800 tracking-tight">Support Queue</h1>
-          <p className="text-slate-500 mt-1 font-medium">Learner escalations awaiting your review</p>
+          <h1 className="text-2xl font-bold text-slate-900">Escalation Queue</h1>
+          <p className="text-slate-500 mt-1">Review sessions handed off by the AI Tutor.</p>
         </div>
-        <div className="flex items-center gap-2 bg-blue-50 text-blue-700 px-5 py-2.5 rounded-xl font-bold text-sm border border-blue-200/50 shadow-sm">
-          <div className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse outline outline-2 outline-green-500/20" />
-          Online & Accepting Queries
+        <div className="flex gap-4">
+          <div className="bg-slate-100 p-3 rounded-lg border border-slate-200 text-center px-6">
+            <p className="text-2xl font-bold text-slate-900">3</p>
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Open</p>
+          </div>
+          <div className="bg-slate-100 p-3 rounded-lg border border-slate-200 text-center px-6">
+            <p className="text-2xl font-bold text-slate-900">14</p>
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">Resolved</p>
+          </div>
         </div>
       </div>
 
-      <div className="flex flex-col xl:flex-row gap-6 h-[calc(100vh-220px)] min-h-[700px]">
-        {/* Queue List (Left Column) */}
-        <div className="w-full xl:w-96 border border-slate-200 bg-white rounded-3xl overflow-hidden shadow-sm flex flex-col shrink-0">
-          <div className="p-6 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
-             <h2 className="font-bold text-slate-800 text-lg">Open Tickets (3)</h2>
-             <button className="text-xs text-blue-600 font-bold hover:underline transition-colors shrink-0">Refresh Sync</button>
+      <div className="bg-white border border-slate-200 rounded-lg shadow-sm">
+        {/* Toolbar */}
+        <div className="p-4 border-b border-slate-100 flex flex-col sm:flex-row gap-4 justify-between bg-slate-50 rounded-t-lg">
+          <div className="relative max-w-sm w-full">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+            <input 
+              type="text" 
+              placeholder="Search by learner or course..." 
+              className="w-full pl-10 pr-4 py-2 bg-white border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm shadow-sm"
+            />
           </div>
-          <div className="overflow-y-auto flex-1 p-3 space-y-2">
-            {MOCK_TICKETS.map((ticket) => (
-              <div 
-                key={ticket.id} 
-                onClick={() => setSelectedTicketId(ticket.id)}
-                className={`p-5 rounded-2xl border cursor-pointer transition-all ${
-                  selectedTicketId === ticket.id 
-                    ? "bg-blue-50/80 border-blue-200 shadow-sm" 
-                    : "bg-white border-slate-100 hover:border-slate-300 hover:bg-slate-50"
-                 }`}
-              >
-                <div className="flex justify-between items-start mb-3">
-                  <span className={`text-[11px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider ${
-                    selectedTicketId === ticket.id ? "bg-blue-100 text-blue-700" : "bg-slate-100 text-slate-600"
-                  }`}>
-                    {ticket.module}
-                  </span>
-                  <span className={`text-xs font-bold flex items-center gap-1.5 ${
-                     parseInt(ticket.wait) > 30 || ticket.wait.includes('h') ? 'text-red-500' : 'text-slate-400'
-                  }`}>
-                    <Clock size={14}/> {ticket.wait} wait
-                  </span>
-                </div>
-                <h3 className="font-bold text-slate-800 mb-1 line-clamp-1">{ticket.name}</h3>
-                <p className={`text-xs font-medium line-clamp-1 ${selectedTicketId === ticket.id ? 'text-blue-600/80' : 'text-slate-500'}`}>
-                  {ticket.course}
-                </p>
-              </div>
-            ))}
+          <div className="flex gap-2">
+            <button className="flex items-center gap-2 px-4 py-2 border border-slate-300 bg-white hover:bg-slate-50 rounded-md text-sm font-medium text-slate-700 shadow-sm transition-colors">
+              <Filter size={16} /> Filter
+            </button>
+            <button className="flex items-center gap-2 px-4 py-2 border border-slate-300 bg-white hover:bg-slate-50 rounded-md text-sm font-medium text-slate-700 shadow-sm transition-colors">
+              Sort by: Newest
+            </button>
           </div>
         </div>
 
-        {/* Selected Ticket Area (Right Column) */}
-        <div className="flex-1 border border-slate-200 bg-white rounded-3xl overflow-hidden shadow-sm flex flex-col min-w-0">
-           {/* Ticket Context Header */}
-           <div className="p-6 md:p-8 border-b border-slate-100 flex flex-col md:flex-row md:justify-between md:items-center gap-4 bg-white relative overflow-hidden">
-             <div className="absolute right-0 top-0 w-64 h-64 bg-slate-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-             <div className="relative z-10">
-               <h2 className="font-black text-slate-900 text-2xl tracking-tight mb-1">{selectedTicket.name}</h2>
-               <p className="text-sm font-bold text-slate-500 flex items-center gap-2">
-                 <span className="text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-100">{selectedTicket.course}</span> 
-                 • Escalated {selectedTicket.wait} ago
-               </p>
-             </div>
-             <button className="relative z-10 flex items-center justify-center gap-2 px-5 py-3 bg-white border-2 border-slate-200 text-slate-700 rounded-xl hover:bg-slate-50 text-sm font-bold transition-all hover:-translate-y-0.5">
-               <FileText size={18} /> View Learner Profile
-             </button>
-           </div>
-           
-           {/* Session Transcript Viewer */}
-           <div className="flex-1 p-6 md:p-8 overflow-y-auto bg-slate-50/50 border-b border-slate-200 space-y-6">
-             <div className="mb-8 border-b border-slate-200/60 pb-4">
-                <p className="text-xs font-black text-slate-400 uppercase tracking-widest text-center">--- AI Session Transcript Started ---</p>
-             </div>
-
-             {selectedTicket.transcript.map((msg, i) => (
-                <div key={i} className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  
-                  {msg.role === "system" && (
-                    <div className="w-full flex justify-center my-4">
-                      <div className="bg-amber-50 border border-amber-200 text-amber-800 px-5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2.5 shadow-sm">
-                        <AlertTriangle size={16} className="text-amber-600" />
-                        {msg.content}
-                      </div>
+        {/* List */}
+        <div className="divide-y divide-slate-100">
+          {escalations.map((item) => (
+            <div key={item.id} className="p-5 flex flex-col sm:flex-row gap-4 justify-between hover:bg-slate-50 transition-colors">
+              <div className="flex gap-4">
+                 <div className="mt-1">
+                   {item.status === 'resolved' 
+                    ? <CheckCircle size={20} className="text-green-500" />
+                    : <AlertCircle size={20} className={item.priority === 'high' ? 'text-red-500' : item.priority === 'medium' ? 'text-orange-500' : 'text-blue-500'} />
+                   }
+                 </div>
+                 <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <h3 className="font-bold text-slate-900">{item.learner}</h3>
+                      <span className="text-xs text-slate-400">&bull;</span>
+                      <span className="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-0.5 rounded">{item.course}</span>
                     </div>
-                  )}
-
-                  {msg.role === "ai" && (
-                    <div className="flex gap-4 max-w-[85%] sm:max-w-[70%]">
-                      <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0 shadow-inner mt-1 border border-slate-300">
-                         <ShieldCheck size={20} className="text-slate-500" />
-                      </div>
-                      <div className={`p-5 rounded-2xl rounded-tl-sm text-sm border
-                        ${msg.escalated ? 'bg-amber-50 border-amber-200 text-amber-900 shadow-sm' : 'bg-white border-slate-200 text-slate-700 shadow-sm'}
-                      `}>
-                        <div className="prose prose-sm prose-slate max-w-none">
-                          <ReactMarkdown>{msg.content}</ReactMarkdown>
-                        </div>
-                      </div>
+                    <p className="text-sm font-medium text-slate-800 mb-2">{item.reason}</p>
+                    <div className="flex items-center gap-4 text-xs text-slate-500">
+                      <span className="flex items-center gap-1"><Clock size={14} /> {item.time}</span>
+                      <span>ID: {item.id}</span>
                     </div>
-                  )}
-
-                  {msg.role === "user" && (
-                    <div className="flex gap-4 max-w-[85%] sm:max-w-[70%] flex-row-reverse">
-                      <div className="w-10 h-10 rounded-full bg-blue-100 border border-blue-200 flex items-center justify-center flex-shrink-0 shadow-inner mt-1">
-                         <User size={20} className="text-blue-700" />
-                      </div>
-                      <div className="bg-slate-900 text-white p-5 rounded-2xl rounded-tr-sm text-sm shadow-md">
-                        <p className="leading-relaxed">{msg.content}</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-             ))}
-           </div>
-
-           {/* Resolution Action Area */}
-           <div className="p-6 md:p-8 bg-white shrink-0">
-             <h3 className="font-bold text-slate-800 text-sm uppercase tracking-wider mb-4">Tutor Resolution Action</h3>
-             <div className="relative mb-4">
-               <textarea 
-                 rows={4} 
-                 placeholder="Draft your reply to the learner or enter internal resolution notes..." 
-                 className="w-full pl-5 pr-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm shadow-inner resize-none font-medium text-slate-700"
-               />
-             </div>
-             <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 border-2 border-slate-200 bg-white text-slate-700 rounded-xl hover:bg-slate-50 font-bold transition-all shadow-sm hover:-translate-y-0.5">
-                  <Video size={18} /> Record Video Reply
-                </button>
-                <button className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 font-bold transition-all shadow-md hover:-translate-y-0.5">
-                  <CheckCircle size={18} /> Mark Ticket Resolved
-                </button>
-             </div>
-           </div>
+                 </div>
+              </div>
+              <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-3 shrink-0">
+                {item.status === 'open' ? (
+                  <>
+                    <button className="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-md text-sm font-medium shadow-sm transition-colors">
+                      Review Transcript
+                    </button>
+                  </>
+                ) : (
+                  <button className="border border-slate-300 hover:bg-slate-100 text-slate-700 px-4 py-2 rounded-md text-sm font-medium shadow-sm transition-colors">
+                    View Resolution
+                  </button>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

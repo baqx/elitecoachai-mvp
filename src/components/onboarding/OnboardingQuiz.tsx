@@ -60,7 +60,7 @@ export function OnboardingQuiz() {
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+    <div className="w-full max-w-2xl mx-auto bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
       {/* Header & Progress */}
       <div className="bg-slate-50 p-6 border-b border-slate-100">
         <div className="flex justify-between text-sm font-semibold text-slate-500 mb-3">
@@ -88,7 +88,7 @@ export function OnboardingQuiz() {
               {["Software Engineer", "Product Manager", "Data Analyst", "Student", "Educator", "Other"].map((role) => (
                 <label 
                   key={role} 
-                  className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.role === role ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
+                  className={`flex items-center gap-3 p-4 rounded-md border-2 cursor-pointer transition-all ${formData.role === role ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
                 >
                   <input 
                     type="radio" 
@@ -114,7 +114,7 @@ export function OnboardingQuiz() {
               {["Less than 1 year", "1-3 years", "3-5 years", "5+ years"].map((exp) => (
                 <label 
                   key={exp} 
-                  className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.experience === exp ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
+                  className={`flex items-center gap-3 p-4 rounded-md border-2 cursor-pointer transition-all ${formData.experience === exp ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
                 >
                   <input 
                     type="radio" 
@@ -145,7 +145,7 @@ export function OnboardingQuiz() {
               ].map((goal) => (
                 <label 
                   key={goal} 
-                  className={`flex items-center gap-3 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.goal === goal ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
+                  className={`flex items-center gap-3 p-4 rounded-md border-2 cursor-pointer transition-all ${formData.goal === goal ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
                 >
                   <input 
                     type="radio" 
@@ -176,7 +176,7 @@ export function OnboardingQuiz() {
               ].map((skill) => (
                 <label 
                   key={skill.level} 
-                  className={`flex flex-col gap-1 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.pythonSkill === skill.level ? 'border-blue-500 bg-blue-50 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200'}`}
+                  className={`flex flex-col gap-1 p-4 rounded-md border-2 cursor-pointer transition-all ${formData.pythonSkill === skill.level ? 'border-blue-500 bg-blue-50 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200'}`}
                 >
                   <input 
                     type="radio" 
@@ -211,7 +211,7 @@ export function OnboardingQuiz() {
               ].map((skill) => (
                 <label 
                   key={skill.level} 
-                  className={`flex flex-col gap-1 p-4 rounded-xl border-2 cursor-pointer transition-all ${formData.mlSkill === skill.level ? 'border-blue-500 bg-blue-50 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200'}`}
+                  className={`flex flex-col gap-1 p-4 rounded-md border-2 cursor-pointer transition-all ${formData.mlSkill === skill.level ? 'border-blue-500 bg-blue-50 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200'}`}
                 >
                   <input 
                     type="radio" 

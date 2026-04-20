@@ -9,7 +9,7 @@ import {
   Users, 
   BarChart, 
   ListOrdered, 
-  DollarSign,
+  Wallet,
   Menu,
   X
 } from "lucide-react";
@@ -33,7 +33,7 @@ export function Sidebar() {
     ],
     Tutor: [
       { name: "Queue", href: "/tutor/queue", icon: ListOrdered },
-      { name: "Earnings", href: "/tutor/earnings", icon: DollarSign },
+      { name: "Earnings", href: "/tutor/earnings", icon: Wallet },
     ],
   };
 
@@ -63,7 +63,7 @@ export function Sidebar() {
       `}>
         <div className="p-6 border-b border-slate-100">
           <Link href="/dashboard" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
-            <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold tracking-tight">E</div>
+            <div className="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center text-white font-bold tracking-tight">E</div>
             <h1 className="text-xl font-bold tracking-tight text-slate-800">
               EliteCoach<span className="text-blue-600">.ai</span>
             </h1>
@@ -85,9 +85,9 @@ export function Sidebar() {
                 href={link.href}
                 onClick={() => setIsOpen(false)}
                 className={`
-                  flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
+                  flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-200
                   ${isActive 
-                    ? "bg-blue-50 text-blue-700 shadow-sm shadow-green-100/50" 
+                    ? "bg-blue-50 text-blue-700 font-semibold" 
                     : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}
                 `}
               >
@@ -102,7 +102,7 @@ export function Sidebar() {
           <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3 block">
             Demo User Role
           </label>
-          <div className="flex bg-slate-200/60 p-1 rounded-lg">
+          <div className="flex bg-slate-100 p-1 rounded-md border border-slate-200">
             {(["Learner", "Admin", "Tutor"] as Role[]).map((r) => (
               <button
                 key={r}

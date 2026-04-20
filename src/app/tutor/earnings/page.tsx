@@ -1,4 +1,4 @@
-import { DollarSign, TrendingUp, Calendar } from "lucide-react";
+import { Wallet, TrendingUp, Calendar } from "lucide-react";
 
 export default function TutorEarningsPage() {
   return (
@@ -11,9 +11,9 @@ export default function TutorEarningsPage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-gradient-to-br from-blue-600 to-blue-700 p-6 rounded-2xl shadow-md text-white">
           <div className="flex items-center gap-2 text-blue-100 mb-4 font-medium">
-            <DollarSign size={18} /> Available Balance
+            <Wallet size={18} /> Available Balance
           </div>
-          <p className="text-4xl font-bold tracking-tight mb-2">$1,240.50</p>
+          <p className="text-4xl font-bold tracking-tight mb-2">₦1,240,500.00</p>
           <div className="flex justify-between items-center mt-6 pt-4 border-t border-blue-500/30">
             <span className="text-sm text-blue-100">Next payout: Nov 1</span>
             <button className="px-4 py-1.5 bg-white text-blue-700 text-sm font-bold rounded-lg shadow-sm hover:bg-blue-50 transition-colors">
@@ -26,7 +26,7 @@ export default function TutorEarningsPage() {
           <div className="flex items-center gap-2 text-slate-500 mb-4 font-medium">
              <TrendingUp size={18} /> This Month
           </div>
-          <p className="text-3xl font-bold text-slate-800 mb-2">$850.00</p>
+          <p className="text-3xl font-bold text-slate-800 mb-2">₦850,000.00</p>
           <p className="text-sm font-medium text-blue-600 flex items-center gap-1">
             <TrendingUp size={14} /> +12% from last month
           </p>
@@ -37,7 +37,7 @@ export default function TutorEarningsPage() {
              <Calendar size={18} /> Hours Logged
           </div>
           <p className="text-3xl font-bold text-slate-800 mb-2">42.5 hrs</p>
-          <p className="text-sm text-slate-500 mt-1">Average hourly rate: <span className="font-semibold text-slate-700">$20/hr</span></p>
+          <p className="text-sm text-slate-500 mt-1">Average hourly rate: <span className="font-semibold text-slate-700">₦20,000/hr</span></p>
         </div>
       </div>
 
@@ -45,9 +45,9 @@ export default function TutorEarningsPage() {
       <div className="bg-white border border-slate-100 rounded-2xl shadow-sm overflow-hidden">
         <div className="divide-y divide-slate-100">
           {[
-            { date: "Oct 15, 2023", amount: "$640.00", status: "Completed", method: "Bank Transfer (••• 4211)" },
-            { date: "Oct 1, 2023", amount: "$580.00", status: "Completed", method: "Bank Transfer (••• 4211)" },
-            { date: "Sep 15, 2023", amount: "$720.50", status: "Completed", method: "Bank Transfer (••• 4211)" },
+            { date: "Oct 15, 2023", amount: "₦640,000.00", status: "Completed", method: "Bank Transfer (••• 4211)" },
+            { date: "Oct 1, 2023", amount: "₦580,000.00", status: "Completed", method: "Bank Transfer (••• 4211)" },
+            { date: "Sep 15, 2023", amount: "₦720,500.00", status: "Completed", method: "Bank Transfer (••• 4211)" },
           ].map((tx, i) => (
             <div key={i} className="p-4 flex items-center justify-between hover:bg-slate-50 transition-colors">
                <div>
