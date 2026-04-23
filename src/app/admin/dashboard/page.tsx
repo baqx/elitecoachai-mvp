@@ -1,139 +1,198 @@
-import { Users, BookOpen, AlertCircle, BarChart3, ArrowUpRight } from "lucide-react";
+import {
+  Users,
+  BookOpen,
+  AlertCircle,
+  BarChart3,
+  TrendingUp,
+  TrendingDown,
+  ArrowUpRight,
+  Download,
+  UserPlus,
+  Send,
+} from "lucide-react";
+
+const stats = [
+  {
+    name: "Total Learners",
+    value: "842",
+    change: "+12%",
+    up: true,
+    icon: Users,
+    iconBg: "bg-blue-50",
+    iconColor: "text-blue-600",
+    accentColor: "border-l-blue-500",
+  },
+  {
+    name: "Active Enrollments",
+    value: "1,204",
+    change: "+5%",
+    up: true,
+    icon: BookOpen,
+    iconBg: "bg-indigo-50",
+    iconColor: "text-indigo-600",
+    accentColor: "border-l-indigo-500",
+  },
+  {
+    name: "Avg. Completion",
+    value: "68%",
+    change: "+2%",
+    up: true,
+    icon: BarChart3,
+    iconBg: "bg-emerald-50",
+    iconColor: "text-emerald-600",
+    accentColor: "border-l-emerald-500",
+  },
+  {
+    name: "Open Escalations",
+    value: "14",
+    change: "-4",
+    up: false,
+    icon: AlertCircle,
+    iconBg: "bg-rose-50",
+    iconColor: "text-rose-600",
+    accentColor: "border-l-rose-500",
+  },
+];
+
+const atRisk = [
+  { name: "Sarah O.", org: "Access Bank", issue: "10 Days Inactive",  last: "Oct 12",    severity: "red",    action: "Send Nudge"   },
+  { name: "Michael B.", org: "KPMG Africa", issue: "Low Score (45%)", last: "Yesterday", severity: "orange", action: "Assign Tutor" },
+  { name: "David M.", org: "MTN Nigeria",  issue: "Failed Exam x2",   last: "Today",     severity: "red",    action: "View Logs"    },
+];
+
+const quickActions = [
+  { label: "Import Users (CSV)",  sub: "Bulk invite enterprise cohort",   icon: UserPlus   },
+  { label: "Assign Course",       sub: "Enroll teams or individuals",      icon: BookOpen   },
+  { label: "Send Broadcast",      sub: "WhatsApp / Email an org update",   icon: Send       },
+  { label: "Export Report",       sub: "PDF / Excel compliance report",    icon: Download   },
+];
+
+const sevClass: Record<string, string> = {
+  red:    "bg-red-50 text-red-700 border border-red-200",
+  orange: "bg-orange-50 text-orange-700 border border-orange-200",
+};
 
 export default function AdminDashboardPage() {
-  const stats = [
-    { name: "Total Supported Learners", value: "842", change: "+12%", trend: "up", icon: Users },
-    { name: "Active Enrollments", value: "1,204", change: "+5%", trend: "up", icon: BookOpen },
-    { name: "Avg. Completion Rate", value: "68%", change: "+2%", trend: "up", icon: BarChart3 },
-    { name: "Open Escalations", value: "14", change: "-4", trend: "down", icon: AlertCircle },
-  ];
-
   return (
-    <div className="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-      <div className="mb-8 flex justify-between items-end">
+    <div className="max-w-7xl mx-auto space-y-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-slate-900">Platform Overview</h1>
-          <p className="text-slate-500 mt-1">Enterprise administration and high-level metrics.</p>
+          <p className="text-slate-500 text-sm mt-0.5">
+            Enterprise administration and high-level metrics.
+          </p>
         </div>
-        <div className="hidden sm:flex items-center gap-2">
-          <select className="bg-white border border-slate-300 text-slate-700 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block px-3 py-2 shadow-sm">
-            <option>All Organizations</option>
+        <div className="flex gap-2">
+          <select className="bg-white border border-slate-200 text-slate-700 text-sm rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm">
+            <option>All Organisations</option>
             <option>KPMG Africa</option>
             <option>Access Bank</option>
             <option>MTN Nigeria</option>
           </select>
-          <button className="bg-slate-900 hover:bg-slate-800 text-white rounded-md px-4 py-2 text-sm font-medium transition-colors shadow-sm">
-            Export Report
+          <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg px-4 py-2 transition-colors shadow-sm shadow-blue-200 flex items-center gap-2">
+            <Download size={15} /> Export
           </button>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        {stats.map((stat) => (
-          <div key={stat.name} className="bg-white p-5 border border-slate-200 rounded-lg shadow-sm">
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-md bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-600">
-                <stat.icon size={20} />
+      {/* KPI cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {stats.map((s) => (
+          <div
+            key={s.name}
+            className={`bg-white rounded-xl border-l-4 ${s.accentColor} border border-slate-200 shadow-sm p-5`}
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className={`p-2 rounded-lg ${s.iconBg}`}>
+                <s.icon size={18} className={s.iconColor} />
               </div>
-              <span className={`text-xs font-bold px-2 py-1 rounded-md bg-slate-50 flex items-center gap-1 ${stat.trend === 'up' ? 'text-green-600' : 'text-blue-600'}`}>
-                {stat.trend === 'up' && <ArrowUpRight size={14} className="text-green-500" />}
-                {stat.change}
+              <span
+                className={`text-xs font-bold flex items-center gap-1 ${
+                  s.up ? "text-emerald-600" : "text-rose-600"
+                }`}
+              >
+                {s.up ? <TrendingUp size={13} /> : <TrendingDown size={13} />}
+                {s.change}
               </span>
             </div>
-            <div>
-              <p className="text-3xl font-bold text-slate-900">{stat.value}</p>
-              <p className="text-sm font-medium text-slate-500 mt-1">{stat.name}</p>
-            </div>
+            <p className="text-3xl font-bold text-slate-900">{s.value}</p>
+            <p className="text-xs font-medium text-slate-500 mt-1">{s.name}</p>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* At Risk Table */}
-        <div className="lg:col-span-2 bg-white border border-slate-200 rounded-lg shadow-sm overflow-hidden">
-          <div className="px-5 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
-            <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Learners At Risk</h2>
-            <button className="text-xs font-medium text-blue-600 hover:text-blue-700">View All</button>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* At-risk table */}
+        <div className="lg:col-span-2 bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+            <div>
+              <h2 className="text-sm font-bold text-slate-900">Learners at Risk</h2>
+              <p className="text-xs text-slate-500 mt-0.5">Needs immediate attention</p>
+            </div>
+            <button className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+              View all <ArrowUpRight size={13} />
+            </button>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm text-left text-slate-600">
-              <thead className="text-xs text-slate-500 uppercase bg-slate-50/50 border-b border-slate-100">
-                <tr>
-                  <th scope="col" className="px-5 py-3">Learner</th>
-                  <th scope="col" className="px-5 py-3">Organization</th>
-                  <th scope="col" className="px-5 py-3">Status</th>
-                  <th scope="col" className="px-5 py-3">Last Active</th>
-                  <th scope="col" className="px-5 py-3 text-right">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="bg-white border-b border-slate-50 hover:bg-slate-50 transition-colors">
-                  <td className="px-5 py-3 font-medium text-slate-900">Sarah O.</td>
-                  <td className="px-5 py-3 text-slate-500">Access Bank</td>
-                  <td className="px-5 py-3">
-                    <span className="bg-red-50 text-red-700 border border-red-200 px-2 py-0.5 rounded text-xs font-medium">10 Days Inactive</span>
+
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-slate-50 border-b border-slate-100 text-xs text-slate-500 uppercase font-semibold tracking-wide">
+                <th className="px-5 py-3 text-left">Learner</th>
+                <th className="px-5 py-3 text-left">Organisation</th>
+                <th className="px-5 py-3 text-left">Issue</th>
+                <th className="px-5 py-3 text-left">Last Active</th>
+                <th className="px-5 py-3 text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100">
+              {atRisk.map((r) => (
+                <tr key={r.name} className="hover:bg-slate-50 transition-colors">
+                  <td className="px-5 py-3.5 font-semibold text-slate-900">{r.name}</td>
+                  <td className="px-5 py-3.5 text-slate-500">{r.org}</td>
+                  <td className="px-5 py-3.5">
+                    <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${sevClass[r.severity]}`}>
+                      {r.issue}
+                    </span>
                   </td>
-                  <td className="px-5 py-3">Oct 12, 2026</td>
-                  <td className="px-5 py-3 text-right">
-                    <button className="text-blue-600 hover:text-blue-800 font-medium text-xs">Send Nudge</button>
-                  </td>
-                </tr>
-                <tr className="bg-white border-b border-slate-50 hover:bg-slate-50 transition-colors">
-                  <td className="px-5 py-3 font-medium text-slate-900">Michael B.</td>
-                  <td className="px-5 py-3 text-slate-500">KPMG Africa</td>
-                  <td className="px-5 py-3">
-                    <span className="bg-orange-50 text-orange-700 border border-orange-200 px-2 py-0.5 rounded text-xs font-medium">Low Score (45%)</span>
-                  </td>
-                  <td className="px-5 py-3">Yesterday</td>
-                  <td className="px-5 py-3 text-right">
-                    <button className="text-blue-600 hover:text-blue-800 font-medium text-xs">Assign Tutor</button>
+                  <td className="px-5 py-3.5 text-slate-500 text-xs">{r.last}</td>
+                  <td className="px-5 py-3.5 text-right">
+                    <button className="text-xs font-semibold text-blue-600 hover:text-blue-800 transition-colors">
+                      {r.action}
+                    </button>
                   </td>
                 </tr>
-                <tr className="bg-white hover:bg-slate-50 transition-colors">
-                  <td className="px-5 py-3 font-medium text-slate-900">David M.</td>
-                  <td className="px-5 py-3 text-slate-500">MTN Nigeria</td>
-                  <td className="px-5 py-3">
-                    <span className="bg-red-50 text-red-700 border border-red-200 px-2 py-0.5 rounded text-xs font-medium">Failed Exam x2</span>
-                  </td>
-                  <td className="px-5 py-3">Today</td>
-                  <td className="px-5 py-3 text-right">
-                    <button className="text-blue-600 hover:text-blue-800 font-medium text-xs">View Logs</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
 
-        {/* Quick Actions */}
-        <div className="bg-white border border-slate-200 rounded-lg shadow-sm">
-          <div className="px-5 py-4 border-b border-slate-100 bg-slate-50">
-            <h2 className="text-sm font-bold text-slate-900 uppercase tracking-wider">Quick Actions</h2>
+        {/* Quick actions */}
+        <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="px-5 py-4 border-b border-slate-100">
+            <h2 className="text-sm font-bold text-slate-900">Quick Actions</h2>
           </div>
-          <div className="p-2">
-            <button className="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-md transition-colors text-left group">
-              <div>
-                <p className="text-sm font-medium text-slate-900 group-hover:text-blue-700 transition-colors">Import Users (CSV)</p>
-                <p className="text-xs text-slate-500 mt-0.5">Bulk invite enterprise cohort</p>
-              </div>
-              <ArrowUpRight size={16} className="text-slate-400 group-hover:text-blue-600" />
-            </button>
-            <div className="h-px bg-slate-100 mx-3"></div>
-            <button className="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-md transition-colors text-left group">
-              <div>
-                <p className="text-sm font-medium text-slate-900 group-hover:text-blue-700 transition-colors">Assign Courses</p>
-                <p className="text-xs text-slate-500 mt-0.5">Enroll teams or individuals</p>
-              </div>
-              <ArrowUpRight size={16} className="text-slate-400 group-hover:text-blue-600" />
-            </button>
-             <div className="h-px bg-slate-100 mx-3"></div>
-            <button className="w-full flex items-center justify-between p-3 hover:bg-slate-50 rounded-md transition-colors text-left group">
-              <div>
-                <p className="text-sm font-medium text-slate-900 group-hover:text-blue-700 transition-colors">Send Broadcast</p>
-                <p className="text-xs text-slate-500 mt-0.5">WhatsApp / Email an update</p>
-              </div>
-              <ArrowUpRight size={16} className="text-slate-400 group-hover:text-blue-600" />
-            </button>
+          <div className="divide-y divide-slate-100">
+            {quickActions.map((qa) => (
+              <button
+                key={qa.label}
+                className="w-full flex items-center gap-4 px-5 py-4 hover:bg-slate-50 transition-colors text-left group"
+              >
+                <div className="w-9 h-9 rounded-lg bg-slate-100 group-hover:bg-blue-50 flex items-center justify-center flex-shrink-0 transition-colors">
+                  <qa.icon size={16} className="text-slate-500 group-hover:text-blue-600 transition-colors" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-blue-700 transition-colors leading-tight">
+                    {qa.label}
+                  </p>
+                  <p className="text-xs text-slate-500 mt-0.5">{qa.sub}</p>
+                </div>
+                <ArrowUpRight
+                  size={15}
+                  className="ml-auto text-slate-300 group-hover:text-blue-500 transition-colors flex-shrink-0"
+                />
+              </button>
+            ))}
           </div>
         </div>
       </div>

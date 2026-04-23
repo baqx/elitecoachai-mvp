@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChevronRight, ChevronLeft, CheckCircle2 } from "lucide-react";
+import { ChevronRight, ChevronLeft, CheckCircle2, Star, Briefcase, Target, Code, Brain, Zap } from "lucide-react";
 
 type QuizData = {
   role: string;
@@ -42,10 +42,9 @@ export function OnboardingQuiz() {
 
   const handleSubmit = () => {
     setIsSubmitting(true);
-    // Simulate generation delay
     setTimeout(() => {
       router.push("/dashboard");
-    }, 1500);
+    }, 2000);
   };
 
   const isCurrentStepValid = () => {
@@ -59,216 +58,159 @@ export function OnboardingQuiz() {
     }
   };
 
-  return (
-    <div className="w-full max-w-2xl mx-auto bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
-      {/* Header & Progress */}
-      <div className="bg-slate-50 p-6 border-b border-slate-100">
-        <div className="flex justify-between text-sm font-semibold text-slate-500 mb-3">
-          <span>Question {currentStep} of {totalSteps}</span>
-          <span>{Math.round(progress)}% Completed</span>
+  const CardOption = ({ label, description, value, current, onClick, icon: Icon }: any) => (
+    <div 
+      onClick={() => onClick(value)}
+      className={`
+        relative p-5 rounded-xl border-2 cursor-pointer transition-all duration-200
+        ${current === value 
+          ? 'border-blue-600 bg-blue-50 shadow-md ring-1 ring-blue-600/10' 
+          : 'border-slate-100 bg-white hover:border-slate-300 hover:shadow-sm text-slate-700'}
+      `}
+    >
+      <div className="flex items-start gap-4">
+        <div className={`p-2 rounded-lg ${current === value ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500'}`}>
+          <Icon size={20} />
         </div>
-        <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+        <div className="flex-1">
+          <p className={`font-bold text-base ${current === value ? 'text-blue-900' : 'text-slate-900'}`}>{label}</p>
+          {description && <p className={`text-xs mt-1 leading-relaxed ${current === value ? 'text-blue-700/70' : 'text-slate-500'}`}>{description}</p>}
+        </div>
+        {current === value && (
+          <div className="absolute top-4 right-4">
+            <CheckCircle2 size={18} className="text-blue-600" />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden animate-fade-in">
+      {/* Progress Bar */}
+      <div className="p-1">
+        <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
           <div 
-            className="bg-blue-500 h-full rounded-full transition-all duration-500 ease-out"
+            className="progress-gradient h-full rounded-full transition-all duration-700 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>
       </div>
 
       {/* Content Area */}
-      <div className="p-8 min-h-[320px] flex flex-col justify-center">
-        {currentStep === 1 && (
-          <div className="space-y-6 animate-in slide-in-from-right-4 fade-in duration-300 relative">
-            <div>
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 block">Background • 1/3</span>
-              <h2 className="text-2xl font-bold text-slate-800">What is your current role or profession?</h2>
-              <p className="text-slate-500 mt-2 text-sm">We'll tailor your vocabulary and examples accordingly.</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {["Software Engineer", "Product Manager", "Data Analyst", "Student", "Educator", "Other"].map((role) => (
-                <label 
-                  key={role} 
-                  className={`flex items-center gap-3 p-4 rounded-md border-2 cursor-pointer transition-all ${formData.role === role ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
-                >
-                  <input 
-                    type="radio" 
-                    className="hidden" 
-                    checked={formData.role === role} 
-                    onChange={() => updateFormData("role", role)} 
-                  />
-                  {formData.role === role && <CheckCircle2 size={18} className="text-blue-600" />}
-                  <span className="font-medium">{role}</span>
-                </label>
-              ))}
-            </div>
+      <div className="px-8 py-10 min-h-[480px] flex flex-col">
+        <div className="mb-8">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600 bg-blue-50 px-2 py-0.5 rounded">
+              Step 0{currentStep}
+            </span>
+            <div className="h-px flex-1 bg-slate-100" />
           </div>
-        )}
+          
+          {currentStep === 1 && (
+            <div className="animate-fade-in-up">
+              <h2 className="text-2xl font-bold text-slate-900">What is your current role?</h2>
+              <p className="text-slate-500 mt-2 text-sm leading-relaxed">This helps us customize the technical depth of your curriculum.</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
+                <CardOption icon={Code} label="Software Engineer" value="Software Engineer" current={formData.role} onClick={(v: string) => updateFormData("role", v)} />
+                <CardOption icon={Briefcase} label="Product Manager" value="Product Manager" current={formData.role} onClick={(v: string) => updateFormData("role", v)} />
+                <CardOption icon={Target} label="Data Analyst" value="Data Analyst" current={formData.role} onClick={(v: string) => updateFormData("role", v)} />
+                <CardOption icon={Star} label="Enterprise Executive" value="Executive" current={formData.role} onClick={(v: string) => updateFormData("role", v)} />
+              </div>
+            </div>
+          )}
 
-        {currentStep === 2 && (
-          <div className="space-y-6 animate-in slide-in-from-right-4 fade-in duration-300">
-            <div>
-               <span className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 block">Background • 2/3</span>
-              <h2 className="text-2xl font-bold text-slate-800">How many years of professional experience do you have?</h2>
+          {currentStep === 2 && (
+            <div className="animate-fade-in-up">
+              <h2 className="text-2xl font-bold text-slate-900">Professional Experience</h2>
+              <p className="text-slate-500 mt-2 text-sm">We adjust scenarios based on your seniority level.</p>
+              <div className="space-y-3 mt-8">
+                <CardOption icon={Star} label="Junior (0-2 years)" value="0-2" current={formData.experience} onClick={(v: string) => updateFormData("experience", v)} />
+                <CardOption icon={Star} label="Mid-Level (3-5 years)" value="3-5" current={formData.experience} onClick={(v: string) => updateFormData("experience", v)} />
+                <CardOption icon={Star} label="Senior (6+ years)" value="6+" current={formData.experience} onClick={(v: string) => updateFormData("experience", v)} />
+              </div>
             </div>
-            <div className="grid grid-cols-1 gap-3">
-              {["Less than 1 year", "1-3 years", "3-5 years", "5+ years"].map((exp) => (
-                <label 
-                  key={exp} 
-                  className={`flex items-center gap-3 p-4 rounded-md border-2 cursor-pointer transition-all ${formData.experience === exp ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
-                >
-                  <input 
-                    type="radio" 
-                    className="hidden" 
-                    checked={formData.experience === exp} 
-                    onChange={() => updateFormData("experience", exp)} 
-                  />
-                  {formData.experience === exp && <CheckCircle2 size={18} className="text-blue-600" />}
-                  <span className="font-medium">{exp}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-        )}
+          )}
 
-        {currentStep === 3 && (
-          <div className="space-y-6 animate-in slide-in-from-right-4 fade-in duration-300">
-            <div>
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 block">Background • 3/3</span>
-              <h2 className="text-2xl font-bold text-slate-800">What is your primary learning goal?</h2>
+          {currentStep === 3 && (
+            <div className="animate-fade-in-up">
+              <h2 className="text-2xl font-bold text-slate-900">Primary Learning Goal</h2>
+              <p className="text-slate-500 mt-2 text-sm">Your milestone path will be oriented around this objective.</p>
+              <div className="space-y-3 mt-8">
+                <CardOption icon={Briefcase} label="Transition to AI-focused Role" description="Move from traditional PM/Eng to AI Product/ML Engineer" value="Transition" current={formData.goal} onClick={(v: string) => updateFormData("goal", v)} />
+                <CardOption icon={Zap} label="Lead AI Strategy" description="Drive high-level AI implementation in your current organisation" value="Strategy" current={formData.goal} onClick={(v: string) => updateFormData("goal", v)} />
+                <CardOption icon={CheckCircle2} label="Practical Skill Upskilling" description="Master specific tools like Python, RAG architectures, and fine-tuning" value="Upskill" current={formData.goal} onClick={(v: string) => updateFormData("goal", v)} />
+              </div>
             </div>
-            <div className="grid grid-cols-1 gap-3">
-              {[
-                "Transitioning into a new AI role", 
-                "Upskilling for my current job", 
-                "Building my own AI projects", 
-                "General curiosity and education"
-              ].map((goal) => (
-                <label 
-                  key={goal} 
-                  className={`flex items-center gap-3 p-4 rounded-md border-2 cursor-pointer transition-all ${formData.goal === goal ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200 text-slate-700'}`}
-                >
-                  <input 
-                    type="radio" 
-                    className="hidden" 
-                    checked={formData.goal === goal} 
-                    onChange={() => updateFormData("goal", goal)} 
-                  />
-                  {formData.goal === goal && <CheckCircle2 size={18} className="text-blue-600" />}
-                  <span className="font-medium">{goal}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-        )}
+          )}
 
-        {currentStep === 4 && (
-          <div className="space-y-6 animate-in slide-in-from-right-4 fade-in duration-300">
-            <div>
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 block">Skills • 1/2</span>
-              <h2 className="text-2xl font-bold text-slate-800">How comfortable are you with Python?</h2>
-              <p className="text-slate-500 mt-2 text-sm">Most AI logic involves Python ecosystems.</p>
+          {currentStep === 4 && (
+            <div className="animate-fade-in-up">
+              <h2 className="text-2xl font-bold text-slate-900">Python Proficiency</h2>
+              <p className="text-slate-500 mt-2 text-sm">Most Elite Coach labs involve hands-on Python execution.</p>
+              <div className="space-y-3 mt-8">
+                <CardOption icon={Code} label="Beginner" description="I've never used it or only know the very basics" value="Beginner" current={formData.pythonSkill} onClick={(v: string) => updateFormData("pythonSkill", v)} />
+                <CardOption icon={Code} label="Intermediate" description="I can write logic, handle dataframes, and use basic APIs" value="Intermediate" current={formData.pythonSkill} onClick={(v: string) => updateFormData("pythonSkill", v)} />
+                <CardOption icon={Code} label="Advanced" description="I'm comfortable with complex architectures and libraries" value="Advanced" current={formData.pythonSkill} onClick={(v: string) => updateFormData("pythonSkill", v)} />
+              </div>
             </div>
-            <div className="grid grid-cols-1 gap-3">
-              {[
-                { level: "Beginner", desc: "I've never used it or only know basics like print statements" },
-                { level: "Intermediate", desc: "I can write scripts, use loops, and build basic functions" },
-                { level: "Advanced", desc: "I'm extremely comfortable with advanced logic, classes, and libraries" }
-              ].map((skill) => (
-                <label 
-                  key={skill.level} 
-                  className={`flex flex-col gap-1 p-4 rounded-md border-2 cursor-pointer transition-all ${formData.pythonSkill === skill.level ? 'border-blue-500 bg-blue-50 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200'}`}
-                >
-                  <input 
-                    type="radio" 
-                    className="hidden" 
-                    checked={formData.pythonSkill === skill.level} 
-                    onChange={() => updateFormData("pythonSkill", skill.level)} 
-                  />
-                  <div className="flex items-center gap-2">
-                    {formData.pythonSkill === skill.level && <CheckCircle2 size={16} className="text-blue-600" />}
-                    <span className={`font-bold ${formData.pythonSkill === skill.level ? 'text-blue-800' : 'text-slate-800'}`}>{skill.level}</span>
-                  </div>
-                  <span className={`text-sm ml-[1.6rem] ${formData.pythonSkill === skill.level ? 'text-blue-600' : 'text-slate-500'}`}>{skill.desc}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-        )}
+          )}
 
-        {currentStep === 5 && (
-          <div className="space-y-6 animate-in slide-in-from-right-4 fade-in duration-300">
-            <div>
-              <span className="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 block">Skills • 2/2</span>
-              <h2 className="text-2xl font-bold text-slate-800">How would you rate your knowledge of ML concepts?</h2>
-              <p className="text-slate-500 mt-2 text-sm">E.g. Neural Networks, Transformers, Prompt Engineering</p>
+          {currentStep === 5 && (
+            <div className="animate-fade-in-up">
+              <h2 className="text-2xl font-bold text-slate-900">ML Knowledge Level</h2>
+              <p className="text-slate-500 mt-2 text-sm">How well do you understand models and training logic?</p>
+              <div className="space-y-3 mt-8">
+                <CardOption icon={Brain} label="Conceptual" description="I know what they are but have never built or tuned models" value="Conceptual" current={formData.mlSkill} onClick={(v: string) => updateFormData("mlSkill", v)} />
+                <CardOption icon={Brain} label="Practical Practitioner" description="I have used APIs and built some toy ML apps" value="Practical" current={formData.mlSkill} onClick={(v: string) => updateFormData("mlSkill", v)} />
+                <CardOption icon={Brain} label="Domain Expert" description="I fine-tune models and understand weight optimization" value="Expert" current={formData.mlSkill} onClick={(v: string) => updateFormData("mlSkill", v)} />
+              </div>
             </div>
-            <div className="grid grid-cols-1 gap-3">
-              {[
-                { level: "None", desc: "What does ML stand for?" },
-                { level: "Conceptual", desc: "I know what they are but have never built or tuned models" },
-                { level: "Practical", desc: "I have used APIs and built some toy ML applications before" },
-                { level: "Expert", desc: "I routinely fine-tune arrays, weights, and understand deeper logic" }
-              ].map((skill) => (
-                <label 
-                  key={skill.level} 
-                  className={`flex flex-col gap-1 p-4 rounded-md border-2 cursor-pointer transition-all ${formData.mlSkill === skill.level ? 'border-blue-500 bg-blue-50 shadow-sm' : 'border-slate-100 bg-white hover:border-slate-200'}`}
-                >
-                  <input 
-                    type="radio" 
-                    className="hidden" 
-                    checked={formData.mlSkill === skill.level} 
-                    onChange={() => updateFormData("mlSkill", skill.level)} 
-                  />
-                  <div className="flex items-center gap-2">
-                    {formData.mlSkill === skill.level && <CheckCircle2 size={16} className="text-blue-600" />}
-                    <span className={`font-bold ${formData.mlSkill === skill.level ? 'text-blue-800' : 'text-slate-800'}`}>{skill.level}</span>
-                  </div>
-                  <span className={`text-sm ml-[1.6rem] ${formData.mlSkill === skill.level ? 'text-blue-600' : 'text-slate-500'}`}>{skill.desc}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
+          )}
+        </div>
 
-      {/* Footer Controls */}
-      <div className="p-6 border-t border-slate-100 bg-slate-50 flex justify-between items-center">
-        <button 
-          onClick={handlePrev}
-          disabled={currentStep === 1 || isSubmitting}
-          className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors
-            ${currentStep === 1 ? 'text-slate-300 cursor-not-allowed' : 'text-slate-600 hover:bg-slate-200'}`}
-        >
-          <ChevronLeft size={16} /> Back
-        </button>
-
-        {currentStep < totalSteps ? (
+        {/* Action Buttons */}
+        <div className="mt-auto pt-8 flex items-center justify-between">
           <button 
-            onClick={handleNext}
-            disabled={!isCurrentStepValid()}
-            className={`flex items-center gap-2 px-6 py-2.5 text-sm font-medium rounded-lg shadow-sm transition-all
-              ${!isCurrentStepValid() ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
+            onClick={handlePrev}
+            disabled={currentStep === 1 || isSubmitting}
+            className={`flex items-center gap-2 px-5 py-2.5 text-sm font-bold rounded-xl transition-all
+              ${currentStep === 1 ? 'text-slate-300' : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'}`}
           >
-            Continue <ChevronRight size={16} />
+            <ChevronLeft size={18} /> Previous
           </button>
-        ) : (
-          <button 
-            onClick={handleSubmit}
-            disabled={!isCurrentStepValid() || isSubmitting}
-            className={`flex items-center gap-2 px-6 py-2.5 text-sm font-bold rounded-lg shadow-sm transition-all
-              ${!isCurrentStepValid() ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-slate-900 hover:bg-slate-800 text-white'}`}
-          >
-            {isSubmitting ? (
-               <span className="flex items-center gap-2">
-                 <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                 </svg>
-                 Generating Path...
-               </span>
-            ) : "Generate My Learning Path"}
-          </button>
-        )}
+
+          {currentStep < totalSteps ? (
+            <button 
+              onClick={handleNext}
+              disabled={!isCurrentStepValid()}
+              className={`flex items-center gap-2 px-8 py-3 text-sm font-bold rounded-xl shadow-lg transition-all
+                ${!isCurrentStepValid() 
+                  ? 'bg-slate-100 text-slate-400 cursor-not-allowed' 
+                  : 'bg-blue-600 text-white hover:bg-blue-700 shadow-blue-200 active:scale-[0.98]'}`}
+            >
+              Next Step <ChevronRight size={18} />
+            </button>
+          ) : (
+            <button 
+              onClick={handleSubmit}
+              disabled={!isCurrentStepValid() || isSubmitting}
+              className={`flex items-center gap-2 px-8 py-3 text-sm font-bold rounded-xl shadow-xl transition-all
+                ${!isCurrentStepValid() || isSubmitting
+                  ? 'bg-slate-100 text-slate-400' 
+                  : 'bg-slate-900 text-white hover:bg-slate-800 shadow-slate-300 active:scale-[0.98]'}`}
+            >
+              {isSubmitting ? (
+                <div className="flex items-center gap-3">
+                  <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                  Generating Path...
+                </div>
+              ) : (
+                "Generate My Experience"
+              )}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,17 +1,18 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import { LayoutWrapper } from "@/components/LayoutWrapper";
 
-const roboto = Roboto({
-  variable: "--font-roboto",
-  weight: ["300", "400", "500", "700", "900"],
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "EliteCoach AI",
-  description: " ",
+  description: "AI-Powered Executive Coaching & Learning Path Generation",
 };
 
 export default function RootLayout({
@@ -20,8 +21,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${roboto.variable} h-full antialiased font-sans`}>
-      <body className="min-h-full flex flex-col text-slate-900 bg-white">
+    <html lang="en" className={`${outfit.variable} h-full antialiased`}>
+      <body className={`${outfit.className} min-h-full flex flex-col text-slate-700 bg-white selection:bg-blue-100 selection:text-blue-900`}>
         <LayoutWrapper>
           {children}
         </LayoutWrapper>

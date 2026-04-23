@@ -6,7 +6,11 @@ export type Course = {
   difficulty: "Beginner" | "Intermediate" | "Advanced";
   modulesCount: number;
   durationHours: number;
-  image?: string;
+  instructor: string;
+  rating: number;
+  ratingCount: number;
+  color: string; // Tailwind bg gradient classes for card thumbnail
+  price: string; // Naira
 };
 
 export type Enrollment = {
@@ -25,6 +29,11 @@ export const MOCK_COURSES: Course[] = [
     difficulty: "Beginner",
     modulesCount: 6,
     durationHours: 12,
+    instructor: "Dr. Amaka Obi",
+    rating: 4.8,
+    ratingCount: 1243,
+    color: "from-blue-500 to-indigo-600",
+    price: "₦45,000",
   },
   {
     id: "c-102",
@@ -34,6 +43,11 @@ export const MOCK_COURSES: Course[] = [
     difficulty: "Intermediate",
     modulesCount: 8,
     durationHours: 20,
+    instructor: "Chukwuemeka Adeyemi",
+    rating: 4.6,
+    ratingCount: 892,
+    color: "from-purple-500 to-violet-600",
+    price: "₦65,000",
   },
   {
     id: "c-103",
@@ -43,6 +57,11 @@ export const MOCK_COURSES: Course[] = [
     difficulty: "Advanced",
     modulesCount: 4,
     durationHours: 8,
+    instructor: "Ngozi Eze, MBA",
+    rating: 4.9,
+    ratingCount: 531,
+    color: "from-rose-500 to-pink-600",
+    price: "₦85,000",
   },
   {
     id: "c-104",
@@ -52,14 +71,23 @@ export const MOCK_COURSES: Course[] = [
     difficulty: "Intermediate",
     modulesCount: 10,
     durationHours: 25,
-  }
+    instructor: "Babajide Okonkwo, CFA",
+    rating: 4.7,
+    ratingCount: 764,
+    color: "from-emerald-500 to-teal-600",
+    price: "₦75,000",
+  },
 ];
 
 export const MOCK_USER_PROFILE = {
   name: "John Doe",
+  initials: "JD",
   role: "Product Manager",
+  organisation: "Access Bank",
   learningPathName: "AI Transition Path",
   completionOverall: 34,
+  xpPoints: 1240,
+  streakDays: 5,
   enrollments: [
     {
       id: "en-1",
@@ -71,7 +99,7 @@ export const MOCK_USER_PROFILE = {
       id: "en-2",
       courseId: "c-103",
       progressPct: 10,
-      lastAccessed: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
-    }
-  ]
+      lastAccessed: new Date(Date.now() - 86400000).toISOString(),
+    },
+  ],
 };

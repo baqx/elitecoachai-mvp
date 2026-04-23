@@ -1,125 +1,101 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { 
-  LayoutDashboard, 
-  BookOpen, 
-  Users, 
-  BarChart, 
-  ListOrdered, 
-  Wallet,
-  Menu,
-  X
-} from "lucide-react";
+import { LogOut, Zap } from "lucide-react";
+import { MOCK_USER_PROFILE } from "@/lib/mock";
+import { NAV_BY_ROLE, Role } from "@/lib/navigation";
 
-export type Role = "Learner" | "Admin" | "Tutor";
+interface SidebarProps {
+  role: Role;
+}
 
-export function Sidebar() {
-  const [role, setRole] = useState<Role>("Learner");
-  const [isOpen, setIsOpen] = useState(false);
+export function Sidebar({ role }: SidebarProps) {
   const pathname = usePathname();
-
-  const linksByRole = {
-    Learner: [
-      { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-      { name: "Courses", href: "/courses", icon: BookOpen },
-    ],
-    Admin: [
-      { name: "Admin Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
-      { name: "Users", href: "/admin/users", icon: Users },
-      { name: "Reports", href: "/admin/reports", icon: BarChart },
-    ],
-    Tutor: [
-      { name: "Queue", href: "/tutor/queue", icon: ListOrdered },
-      { name: "Earnings", href: "/tutor/earnings", icon: Wallet },
-    ],
-  };
-
-  const currentLinks = linksByRole[role];
+  const profile = MOCK_USER_PROFILE;
+  const sections = NAV_BY_ROLE[role];
 
   return (
-    <>
-      <button 
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-md shadow-md text-slate-700"
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Toggle Navigation"
-      >
-        {isOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
+    <aside
+      className="hidden md:flex h-screen w-64 flex-col bg-slate-950 text-slate-100 border-r border-white/5 flex-shrink-0"
+    >
+      <div className="px-6 py-8">
+        <Link
+          href="/dashboard"
+          className="flex items-center gap-3 active:scale-[0.98] transition-transform"
+        >
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-lg shadow-xl shadow-blue-500/20">
+            E
+          </div>
+          <div className="flex flex-col">
+            <span className="text-lg font-bold tracking-tight text-white leading-none">
+              EliteCoach AI
+            </span>
+           
+          </div>
+        </Link>
+      </div>
 
-      {isOpen && (
-        <div 
-          className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 md:hidden"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
-
-      <aside className={`
-        fixed top-0 left-0 h-screen w-64 bg-white border-r border-slate-200 z-40 transition-transform duration-300 ease-in-out
-        ${isOpen ? "translate-x-0" : "-translate-x-full"}
-        md:translate-x-0 md:static md:flex md:flex-col shadow-sm md:shadow-none
-      `}>
-        <div className="p-6 border-b border-slate-100">
-          <Link href="/dashboard" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
-            <div className="w-8 h-8 rounded-md bg-blue-600 flex items-center justify-center text-white font-bold tracking-tight">E</div>
-            <h1 className="text-xl font-bold tracking-tight text-slate-800">
-              EliteCoach<span className="text-blue-600">.ai</span>
-            </h1>
-          </Link>
-        </div>
-
-        <nav className="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto">
-          <div className="mb-4">
-            <p className="px-3 text-xs font-bold uppercase tracking-wider text-slate-400">
-              Menu
+      <nav className="flex-1 px-4 py-4 space-y-8 overflow-y-auto scrollbar-none">
+        {sections.map((section) => (
+          <div key={section.section}>
+            <p className="px-3 text-[11px] font-semibold text-slate-500 mb-4">
+              {section.section}
             </p>
+            <div className="space-y-1">
+              {section.links.map((link) => {
+                const Icon = link.icon;
+                const isActive =
+                  pathname === link.href ||
+                  (link.href !== "/" && pathname?.startsWith(link.href + "/"));
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`
+                      flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium
+                      transition-all duration-200 group relative active:scale-[0.98]
+                      ${isActive
+                        ? "bg-white/10 text-white shadow-2xl"
+                        : "text-slate-400 hover:bg-white/5 hover:text-white"
+                      }
+                    `}
+                  >
+                    <Icon
+                      size={18}
+                      className={isActive ? "text-blue-500" : "text-slate-500 group-hover:text-blue-500 transition-colors"}
+                    />
+                    {link.name}
+                    {isActive && (
+                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-6 bg-blue-500 rounded-l-full shadow-lg shadow-blue-500/50" />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
-          {currentLinks.map((link) => {
-            const Icon = link.icon;
-            const isActive = pathname === link.href || pathname?.startsWith(link.href + '/');
-            return (
-              <Link 
-                key={link.name} 
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`
-                  flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-all duration-200
-                  ${isActive 
-                    ? "bg-blue-50 text-blue-700 font-semibold" 
-                    : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}
-                `}
-              >
-                <Icon size={18} className={isActive ? "text-blue-600" : "text-slate-400"} />
-                {link.name}
-              </Link>
-            )
-          })}
-        </nav>
+        ))}
+      </nav>
 
-        <div className="p-5 border-t border-slate-100 bg-slate-50/50">
-          <label className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3 block">
-            Demo User Role
-          </label>
-          <div className="flex bg-slate-100 p-1 rounded-md border border-slate-200">
-            {(["Learner", "Admin", "Tutor"] as Role[]).map((r) => (
-              <button
-                key={r}
-                onClick={() => setRole(r)}
-                className={`
-                  flex-1 text-[11px] py-1.5 font-semibold rounded-md transition-all duration-200
-                  ${role === r 
-                    ? "bg-white text-slate-900 shadow-sm ring-1 ring-slate-900/5" 
-                    : "text-slate-500 hover:text-slate-800 hover:bg-slate-200/50"}
-                `}
-              >
-                {r}
-              </button>
-            ))}
-          </div>
-        </div>
-      </aside>
-    </>
+      {/* Footer: User Perspective */}
+      <div className="mt-auto border-t border-white/5 p-4 space-y-2">
+         <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white font-bold text-xs shadow-lg">
+                {profile.initials}
+              </div>
+              <div className="min-w-0">
+                <p className="text-xs font-semibold text-white truncate">{profile.name}</p>
+                <p className="text-[10px] font-medium text-slate-500 truncate">{role} View</p>
+              </div>
+            </div>
+         </div>
+         
+         <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-all active:scale-[0.98]">
+           <LogOut size={16} />
+           Sign Out
+         </button>
+      </div>
+    </aside>
   );
 }
